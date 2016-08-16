@@ -18,3 +18,5 @@ function wpcontent_svg_mime_type( $mimes = array() ) {
     return $mimes;
 }
 add_filter( 'upload_mimes', 'wpcontent_svg_mime_type' );
+
+add_theme_support( 'post-thumbnails' );
