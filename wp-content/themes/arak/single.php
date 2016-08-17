@@ -2,14 +2,9 @@
 /**
  * product page
  */
-
 ?>
 
 <?php get_header(); ?>
-
-
-
-
 
 <section class="product relative">
     <div class="wrap">
@@ -38,23 +33,23 @@
 
                 <?php endif; ?>
 
-                <?php if(get_field('product_page_info_label', 'options')) : ?>
-
-                    <div class="h3"><?= get_field('product_page_info_label', 'options'); ?></div>
-
-                <?php endif; ?>
-
                 <?php if (have_rows('files')) : ?>
+
+                    <?php if(get_field('product_page_info_label', 'options')) : ?>
+
+                        <div class="h3"><?= get_field('product_page_info_label', 'options'); ?></div>
+
+                    <?php endif; ?>
 
                     <?php while (have_rows('files')) : the_row(); ?>
 
                         <?php if(get_sub_field('file')) : ?>
 
-                            <?php
+                            <?php /*the very fucking bullshit: getting file name*/
                             $pos = strripos(get_sub_field('file'), '/') + 1;
                             $file_name = substr(get_sub_field('file'), $pos, strlen(get_sub_field('file'))); ?>
 
-                            <p class="download relative"><a href="file.xsl"><?= $file_name; ?></a></p>
+                            <p class="download relative"><a href="<?= get_sub_field('file'); ?>"><?= $file_name; ?></a></p>
 
                         <?php endif; ?>
 
