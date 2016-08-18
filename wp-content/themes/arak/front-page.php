@@ -1,10 +1,28 @@
 <?php get_header(); ?>
 
+<?php
+//getting all post items of the category
+$args = [
+    'tax_query' => [
+        [
+            'taxonomy' => 'category',
+            'terms' => 2,
+            'include_children' => true
+        ],
+    ],
+];
+
+$posts = get_posts($args); ?>
+
     <section class="big-background relative">
         <div class="wrap">
+
             <?php if(get_field('home_block_1_title')) : ?>
+
                 <div class="h2 absolute"><?= get_field('home_block_1_title'); ?></div>
+
             <?php endif; ?>
+
             <a class="scroll absolute" href="#next-box">
                 <div class="arrow-down">↓</div>
             </a>
@@ -37,37 +55,29 @@
     </section>
     <section class="slider relative">
         <div class="wrap">
+
             <?php if(get_field('home_latest_goods')) : ?>
+
                 <div class="h2 relative"><?= get_field('home_latest_goods'); ?></div>
+
             <?php endif; ?>
 
-
             <ul class="slider-cotainer owl-carousel">
-                <li class="item slider-item relative">
-                    <a href="auto.html">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/slider-1.jpg" alt=""><span>AN/PVS-7B/D</span>
-                    </a>
-                </li>
-                <li class="item slider-item relative">
-                    <a href="gun.html">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/slider-2.jpg" alt=""><span>AN/PVS-22 (International Orders Only)</span>
-                    </a>
-                </li>
-                <li class="item slider-item relative">
-                    <a href="unlethal_gun.html">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/slider-3.jpg" alt=""><span>SCBA air fill adaptor kit</span>
-                    </a>
-                </li>
-                <li class="item slider-item relative">
-                    <a href="#">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/slider-4.jpg" alt=""><span>UTAC 32iL</span>
-                    </a>
-                </li>
-                <li class="item slider-item relative">
-                    <a href="#">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/slider-5.jpg" alt=""><span>UTAC 32iL</span>
-                    </a>
-                </li>
+
+                <?php foreach($posts as $item) : ?>
+
+                    <?php if(get_post_meta($item->ID, 'post_display_home', true)) : ?>
+
+                        <li class="item slider-item relative">
+                            <a href="<?= get_post_permalink($item->ID); ?>">
+                                <img src="<?= wp_get_attachment_url(get_post_thumbnail_id($item->ID)); ?>" alt=""><span><?= $item->post_title; ?></span>
+                            </a>
+                        </li>
+
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+
             </ul>
         </div>
     </section>
@@ -81,51 +91,67 @@
                 <img src="<?= get_template_directory_uri(); ?>/dist/src/img/arak-bottom.png" alt="">
             </figure>
             <div class="about-cotent relative">
+
                 <?php if(get_field('home_about_us_title')) : ?>
-                    <div class="h2"><?= get_field('home_about_us_title'); ?></div>
+
+                    <div id="about_us" class="h2"><?= get_field('home_about_us_title'); ?></div>
+
                 <?php endif; ?>
+
                 <?php if(get_field('home_about_us_text')) : ?>
+
                     <p><?= get_field('home_about_us_text'); ?></p>
+
                 <?php endif; ?>
+
             </div>
         </div>
     </section>
     <section class="news relative">
         <div class="wrap">
+
             <?php if(get_field('home_block_news_title')) : ?>
+
                 <div class="h2"><?= get_field('home_block_news_title'); ?></div>
+
             <?php endif; ?>
+
             <ul class="news-container">
-                <li class="image">
-                    <a href="#">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/news-img-1.jpg" alt="">
-                        <p class="relative">“ARAK. Outdoor Safety” is widely regarded by experts as the most advanced
-                            gun cleaning system in the world.</p>
-                        <span class="date">26.07.2016</span>
-                    </a>
-                </li>
-                <li class="image">
-                    <a href="#">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/news-img-2.jpg" alt="">
-                        <p class="relative">Widely regarded by experts as the most advanced gun cleaning system in the
-                            world.</p>
-                        <span class="date">26.07.2016</span>
-                    </a>
-                </li>
-                <li class="image">
-                    <a href="#">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/news-img-3.jpg" alt="">
-                        <p class="relative">Experts as the most advanced gun cleaning system in the world.</p>
-                        <span class="date">26.07.2016</span>
-                    </a>
-                </li>
-                <li class="image">
-                    <a href="#">
-                        <img src="<?= get_template_directory_uri(); ?>/dist/src/img/news-img-4.jpg" alt="">
-                        <p class="relative">Experts as the most advanced gun cleaning system in the world.</p>
-                        <span class="date">26.07.2016</span>
-                    </a>
-                </li>
+
+                <?php
+                $params = [
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'category',
+                            'terms' => 7,
+                            'include_children' => true
+                        ],
+                    ],
+                ];
+                $blogs = get_posts($params); ?>
+
+                <?php if($blogs) : ?>
+
+                    <?php $i = 0; ?>
+
+                    <?php foreach($blogs as $blog) : ?>
+
+                        <?php if($i == 4) break; ?>
+
+                        <li class="image">
+                            <a href="<?= get_post_permalink($blog->ID); ?>">
+                                <img src="<?= wp_get_attachment_url(get_post_thumbnail_id($blog->ID)); ?>" alt="">
+                                <p class="relative"><?= $blog->post_title; ?></p>
+                                <span class="date"><?= date('Y-m-d', strtotime($blog->post_date)); ?></span>
+                            </a>
+                        </li>
+
+                        <?php $i++; ?>
+
+                    <?php endforeach; ?>
+
+                <?php endif; ?>
+
             </ul>
         </div>
     </section>

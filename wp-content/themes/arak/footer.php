@@ -51,40 +51,31 @@
 
         </div>
 
+        <?php if(qtrans_getLanguage() == 'en') : ?>
 
-        <form>
-            <div class="name relative input">
-                <span>Your name</span>
-                <input type="text">
-            </div>
-            <div class="mail relative input">
-                <span>Phone or e-mail</span>
-                <input type="text">
-            </div>
-            <div class="subject relative input">
-                <span>Subject</span>
-                <input type="text">
-            </div>
-            <div class="message relative">
-                <span>Message</span>
-                <textarea rows="5" style="color:#fff"></textarea>
-                <button class="relative" type="submit">Send</button>
-            </div>
-        </form>
+            <?= do_shortcode('[contact-form-7 id="19" title="Contact form EN"]'); ?>
 
+        <?php endif; ?>
+
+        <?php if(qtrans_getLanguage() == 'ru') : ?>
+
+            <?= do_shortcode('[contact-form-7 id="56" title="Contact form RU"]'); ?>
+
+        <?php endif; ?>
 
     </div>
 </section>
-
-
-
-
-
-
         <footer>
             <section class="reclamare">
-                <p>made by<a href="#"><img src="<?= get_template_directory_uri(); ?>/dist/src/img/rcl-logo.png" alt=""></a>with<i class="fa fa-heart-o"></i></p>
+                <p>made by<a href="http://www.reclamare.ua"><img src="<?= get_template_directory_uri(); ?>/dist/src/img/rcl-logo.png" alt=""></a>with<i class="fa fa-heart-o"></i></p>
             </section>
+            <script>
+                (function ($) {
+                    $(document).ready(function(){
+                        $('#menu-item-5').addClass('drop-down');
+                    });
+                }(jQuery));
+            </script>
         </footer>
 
         <?php wp_footer(); ?>
