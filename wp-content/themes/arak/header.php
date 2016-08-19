@@ -6,11 +6,6 @@
     <meta name="format-detection" content="telephone=no">
     <title><?= wp_title(); ?></title>
     <?php wp_head(); ?>
-    <style>
-       .menu ul.nav{
-           display: inline-block;
-       }
-    </style>
 </head>
 <body>
 <header>
@@ -30,6 +25,8 @@
                 ]); ?>
 
         </ul>
+        <i class="fa fa-search"></i>
+        <i class="fa fa-close"></i>
 
         <?php get_search_form(); ?>
 

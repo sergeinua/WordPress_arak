@@ -28,7 +28,7 @@ ORDER BY wp_posts.post_title LIKE '%". $q_str ."' DESC, wp_posts.post_date DESC"
             </div>
             <div class="search-content content">
 
-                <?php if(count($results) > 0) : ?>
+                <?php if(count($results) > 0 && $q_str != '') : ?>
 
                     <?php foreach($results as $post_item) : ?>
 

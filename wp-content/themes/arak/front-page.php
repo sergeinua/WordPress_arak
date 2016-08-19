@@ -14,7 +14,7 @@ $args = [
 
 $posts = get_posts($args); ?>
 
-    <section class="big-background relative">
+    <section class="big-background relative" style="background-image: url(<?= get_field('home_block_1_background_img'); ?>)">
         <div class="wrap">
 
             <?php if(get_field('home_block_1_title')) : ?>
@@ -100,7 +100,7 @@ $posts = get_posts($args); ?>
 
                 <?php if(get_field('home_about_us_text')) : ?>
 
-                    <p><?= get_field('home_about_us_text'); ?></p>
+                    <span><?= get_field('home_about_us_text'); ?></span>
 
                 <?php endif; ?>
 
@@ -141,8 +141,10 @@ $posts = get_posts($args); ?>
                         <li class="image">
                             <a href="<?= get_post_permalink($blog->ID); ?>">
                                 <img src="<?= wp_get_attachment_url(get_post_thumbnail_id($blog->ID)); ?>" alt="">
-                                <p class="relative"><?= $blog->post_title; ?></p>
-                                <span class="date"><?= date('Y-m-d', strtotime($blog->post_date)); ?></span>
+                                <p class="relative">
+                                    <?= $blog->post_title; ?>
+                                    <span class="date"><?= date('Y-m-d', strtotime($blog->post_date)); ?></span>
+                                </p>
                             </a>
                         </li>
 
