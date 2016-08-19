@@ -48,10 +48,12 @@ function draw_pagination($pages){
  */
 function add_last_nav_item($items) {
     if(qtrans_getLanguage() == 'ru') :
+        $items .= '<li role="menuitem"><a href="#about_us" role="link" class="scroll">О НАС</a></li>';
         $items .= '<li role="menuitem"><a href="' . qtranxf_convertURL('', 'en') . '" role="link" class="relatve lang-link">en</a></li>';
         $items .= '<li role="menuitem"><a href="' . qtranxf_convertURL('', 'ru') . '" role="link" class="active">ru</a></li>';
     endif;
     if(qtrans_getLanguage() == 'en') :
+        $items .= '<li role="menuitem"><a href="#about_us" role="link" class="scroll">ABOUT US</a></li>';
         $items .= '<li role="menuitem"><a href="' . qtranxf_convertURL('', 'ru') . '" role="link" class="relatve lang-link">ru</a></li>';
         $items .= '<li role="menuitem"><a href="' . qtranxf_convertURL('', 'en') . '" role="link" class="active">en</a></li>';
     endif;

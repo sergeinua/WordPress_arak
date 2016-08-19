@@ -90,11 +90,11 @@ $posts = get_posts($args); ?>
             <figure class="about-logo phone">
                 <img src="<?= get_template_directory_uri(); ?>/dist/src/img/arak-bottom.png" alt="">
             </figure>
-            <div class="about-cotent relative">
+            <div class="about-cotent relative" id="about_us">
 
                 <?php if(get_field('home_about_us_title')) : ?>
 
-                    <div id="about_us" class="h2"><?= get_field('home_about_us_title'); ?></div>
+                    <div class="h2"><?= get_field('home_about_us_title'); ?></div>
 
                 <?php endif; ?>
 
